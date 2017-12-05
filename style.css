@@ -1,0 +1,69 @@
+#logo {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -251px;
+  margin-top: -70px;
+  animation-name: show;
+  animation-duration: 1.5s;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+}
+
+#content {
+  opacity: 1;
+  text-align: center;
+  margin-top: 15%;
+  animation-name: hide;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+}
+
+.labelOfAnswer {
+  font-size: 15pt;
+  background: #F59031;
+  border-radius: 6px;
+  padding:10%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #212121;
+}
+
+button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+a:link, a:visited {
+    color: #F59236;
+}
+
+a:hover {
+    color: #F37A09;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
