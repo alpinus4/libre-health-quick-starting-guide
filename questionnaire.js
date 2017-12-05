@@ -5,13 +5,19 @@ var macButton = document.getElementById("macButton");
 var windowsButton = document.getElementById("windowsButton");
 var linuxButton = document.getElementById("linuxButton");
 var artButton, presentationsButton, codingButton, englishButton, notEnglishButton;
+var cSharpButton, cButton, javaButton, javascriptButton, phpButton, pythonButton, otherButton;
 
 var questionsHtmlCode = [
   '<h1 id="question">What do you use?</h1> <div id="answers"> <button class="answer" id="macButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/2000px-Apple_logo_black.svg.png" width="100px" height="100px"> <div class="shade"></div> <p class="labelOfAnswer">I use mac</p> </button> <button class="answer" id="windowsButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Windows_darkblue_2012_svg.svg" width="211px" height="52px"> <div class="shade"></div> <p class="labelOfAnswer">I use windows</p> </button> <button class="answer" id="linuxButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" width="140px" height="165px"> <div class="shade"></div> <p class="labelOfAnswer">I use linux</p> </button> </div>',
   '<h1 id="question">What do you want to do?</h1> <div id="answers"> <button class="answer" id="artButton"> <img src="http://www.publicdomainpictures.net/pictures/40000/velka/artists-palette-clipart.jpg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">I love working with graphics</p> </button> <button class="answer" id="presentationsButton"> <img src="https://publicdomainvectors.org/photos/student_presenting.png" width="150px" height="210px"> <div class="shade"></div> <p class="labelOfAnswer">I create presentations and films quite well</p> </button> <button class="answer" id="codingButton"> <img src="https://publicdomainvectors.org/photos/Laptop.png" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">I prefer programming</p> </button> </div>',
+  '<h1 id="question">Which language do you prefer for programming?</h1> <div id="answers"> <button class="answer" id="c#Button"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/C_Sharp_wordmark.svg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">C#</p> </button> <button class="answer" id="cButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">C and C++</p> </button> <button class="answer" id="javaButton"> <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">Java</p> </button> <button class="answer" id="javascriptButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">Javascript, and generally front-end</p> </button> <button class="answer" id="phpButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">PHP</p> </button> <button class="answer" id="pythonButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg" width="250px" height="95px"> <div class="shade"></div> <p class="labelOfAnswer">Python</p> </button> <button class="answer" id="otherButton"> <img src="https://publicdomainvectors.org/photos/Laptop.png" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">Other</p> </button> </div>',
   '<h1 id="question">Are you good in English?</h1> <div id="answers"> <button class="answer" id="englishButton"> <img src="https://publicdomainvectors.org/photos/mcol_tick.png" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">I know English well</p> </button> <button class="answer" id="notEnglishButton"> <img src="https://publicdomainvectors.org/photos/mcol_cross.png" width="150px" height="150px"> <div class="shade"></div> <p class="labelOfAnswer">I do not know English very well</p> </button> </div>',
   '<h1>What tasks should I do?</h1> <p>Firstly, you have to do this task: <a href="https://gitlab.com/librehealth/gci/issues/12">Become a part of the community</a> </p> <p>Then you should claim any of the tasks below.</p> <div id="matchedTasks"></div>'
 ];
+
+var optionalQuestions = [
+  2
+]
 
 var placeToPasteTheTasks;
 
@@ -102,8 +108,23 @@ linuxButton.onclick = function() {
 
 function nextQuestion() {
   pageCount++;
+  checkOptionalQuestion();
   document.getElementById('content').innerHTML = questionsHtmlCode[pageCount];
   setButtonVariablesForNewQuestion();
+}
+
+function goToThisQuestion(questionNumber) {
+  document.getElementById('content').innerHTML = questionsHtmlCode[questionNumber];
+  pageCount = questionNumber;
+    setButtonVariablesForNewQuestion();
+}
+
+function checkOptionalQuestion() {
+  for (i = 0; i < questionsHtmlCode.length; i++) {
+    if (pageCount == optionalQuestions[i]) {
+      pageCount++;
+    }
+  }
 }
 
 function matchTasks() {
@@ -140,9 +161,6 @@ function checkAllCategories(userPlatform) {
   }
 }
 
-function showAdvisedTasks() {
-  window.location.href = "advised_tasks.html";
-}
 
 function setButtonVariablesForNewQuestion() {
   if (pageCount == 1) {
@@ -159,10 +177,40 @@ function setButtonVariablesForNewQuestion() {
 
     codingButton = document.getElementById("codingButton").addEventListener("click", function() {
       coding = true;
-      nextQuestion();
+      goToThisQuestion(2);
     });
 
   } else if (pageCount == 2) {
+
+    cSharpButton = document.getElementById("c#Button").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    cButton = document.getElementById("cButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    javaButton = document.getElementById("javaButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    javascriptButton = document.getElementById("javascriptButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    phpButton = document.getElementById("phpButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    pythonButton = document.getElementById("pythonButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+    otherButton = document.getElementById("otherButton").addEventListener("click", function() {
+      nextQuestion();
+    });
+
+  } else if (pageCount == 3) {
 
     englishButton = document.getElementById("englishButton").addEventListener("click", function() {
       english = true;
